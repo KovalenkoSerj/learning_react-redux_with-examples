@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+// import * as actionCreator from './redux/actions/action';
+import logo from './logo.svg';
+
 
 class App extends Component {
- 
+
   render() {
     return (
       <div className="App">
@@ -11,19 +14,7 @@ class App extends Component {
           Age: <span>{this.props.age}</span><br/>
           <button onClick={this.props.onAgeUp}>Age Up</button>
           <button onClick={this.props.onAgeDown}>Age Down</button>
-          <hr/>
-          <div>History</div>
-          <div>
-            <ul>
-              {
-                this.props.history.map((item, index) => (
-                  <li key={index} >
-                    {item.age}
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
+          {this.props.loading && <img src={logo} className="App-logo" alt='loading'/>}
         </div>
       </div>
     );
@@ -33,14 +24,14 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return{
-    age: state.age,
-    history: state.history
+    age: state.age
+    // loading: state.loading
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
     onAgeUp: () => dispatch({type: 'AGE_UP', value: 1}),
-    onAgeDown: () => dispatch({type: 'AGE_DOWN', value: 1}),
+    onAgeDown: () => dispatch({type: 'AGE_DOWN', value: 1})
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps )(App);
