@@ -1,1 +1,1 @@
-# just test-learning project for practice
+# just test-learning projects for practice
